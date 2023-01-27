@@ -25,16 +25,12 @@ class PostController extends Controller
 
         $user = Auth::user();
         // $posts = Post::with('category')->paginate(10);
-
         // $posts = Post::with('category');
 
         $data = [
             'posts' => Post::with('category', 'tags')->get()
             // 'categories' => Category::All()
         ];
-
-
-
 
         // posso creare la solita array multidimensionale $data per portarmi dentro entrambe le variabili che ho salvato
 
@@ -53,8 +49,6 @@ class PostController extends Controller
         $tags = Tag::All();
         $userId = Auth::user();
 
-
-
         return view('admin.post.create', compact('categories', 'tags', 'userId'));
     }
 
@@ -70,24 +64,23 @@ class PostController extends Controller
 
         $request->validate(
             [
-                'title' => 'required|max:50'
+                'title' => 'required|max:50',
+                'body' => 'required|max:100'
             ],
             [
                 'title.required' => 'Attenzione il campo title è obbligatorio',
-                'title.max' => 'Attenzione il campo non deve superare i 50 caratteri'
+                'title.max' => 'Attenzione il campo non deve superare i 50 caratteri',
+                'body.required' => 'Dio bestia svegliati!'
             ]
         );
 
-
-
         $new_post = new Post();
         $new_post->fill($data);
+        //mi porto tutti i dati relativi allo user autorizzato in questa sessione
         $new_post->user_id = Auth::user()->id;
-
         $new_post->save();
 
         //controllo dopo aver fatto l'array prodotta dalla checkbox nella create
-
         if (array_key_exists('tags', $data)) {
             $new_post->tags()->sync($data['tags']);
         }
@@ -118,9 +111,7 @@ class PostController extends Controller
     public function edit($id)
     {
         $post_to_edit = Post::findOrFail($id);
-
         $categories = Category::All();
-
         $tags = Tag::All();
 
         return view('admin.post.edit', compact('post_to_edit', 'categories', 'tags'));
@@ -166,6 +157,7 @@ class PostController extends Controller
     public function destroy($id)
     {
         $post_to_delete = Post::findOrFail($id);
+        $post_to_delete->tags()->sync([]);
         $post_to_delete->delete();
         return redirect()->route('admin.post.index')->with('success', "Hai cancellato il post con titolo: $post_to_delete->title");
     }

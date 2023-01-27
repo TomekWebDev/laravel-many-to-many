@@ -14,7 +14,6 @@
 
     {{-- {{ Auth::user()->id }} --}}
 
-
     <form method="POST" action="{{ route('admin.post.store') }}" class="mx-5 my-3">
 
         @csrf
@@ -30,9 +29,11 @@
 
         <div class="mb-3">
             <label class="form-label">Body</label>
-            <textarea name="body" class="form-control" id="">
+            <textarea name="body" class="form-control @error('body') is-invalid @enderror" id=""></textarea>
+            @error('body')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
 
-        </textarea>
         </div>
 
         <div class="mb-3">

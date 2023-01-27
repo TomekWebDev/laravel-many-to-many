@@ -11,12 +11,18 @@
         <div class="card w-25 m-1">
             <img src="..." class="card-img-top" alt="...">
             <div class="card-body">
-                <h4 class="card-title">{{ $item->title }}</h4>
+                <h4 class="card-title">Post title: {{ $item->title }}</h4>
 
-                <p class="card-text">{{ $item->body }}</p>
+                <p class="card-text">Post body: {{ $item->body }}</p>
 
                 @if ($item->category)
                     <h6 class="">{{ $item->category->name }}</h6>
+                @endif
+
+                @if ($item->tags)
+                    @foreach ($item->tags as $tag)
+                        <h6 class="">{{ $tag->name }}</h6>
+                    @endforeach
                 @endif
 
                 <a href="{{ route('admin.post.show', $item->id) }}" class="btn btn-primary">Show</a>

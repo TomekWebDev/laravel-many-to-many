@@ -17,7 +17,6 @@ class TagSeeder extends Seeder
             'Vegetariano',
             'Carne',
             'Pesce'
-
         ];
 
         foreach ($tags as $tag) {
