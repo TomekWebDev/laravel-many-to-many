@@ -5,7 +5,7 @@
         Scrivi nuovo post
     </a>
 
-    <h4 class="mb-5">Lista post dello user: {{ $user->name }} con id: {{ $user->id }}</h4>
+    {{-- <h4 class="mb-5">Lista post dello user: {{ $user->name }} con id: {{ $user->id }}</h4> --}}
 
     @foreach ($posts as $item)
         <div class="card w-25 m-1">
@@ -34,6 +34,7 @@
                     <button type="submit" class="btn btn-outline-danger text-danger my-3">
                         Delete
                     </button>
+                </form>
             </div>
         </div>
     @endforeach
