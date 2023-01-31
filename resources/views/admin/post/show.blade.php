@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="card w-25">
-        <img src="..." class="card-img-top" alt="...">
+        <img src="{{ asset("storage/$item->cover") }}" class="card-img-top" alt="">
         <div class="card-body">
             <h5 class="card-title">{{ $item->title }}</h5>
             <p class="card-text">{{ $item->body }}</p>

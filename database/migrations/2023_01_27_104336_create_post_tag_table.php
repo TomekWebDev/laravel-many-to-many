@@ -32,3 +32,23 @@ class CreatePostTagTable extends Migration
         Schema::dropIfExists('post_tag');
     }
 }
+
+
+// public function up()
+//     {
+//         Schema::table('posts', function (Blueprint $table) {
+//             $table->string('cover')->nullable()->after('body');
+//         });
+//     }
+
+//     /**
+//      * Reverse the migrations.
+//      *
+//      * @return void
+//      */
+//     public function down()
+//     {
+//         Schema::table('posts', function (Blueprint $table) {
+//             $table->dropColumn('cover');
+//         });
+//     }

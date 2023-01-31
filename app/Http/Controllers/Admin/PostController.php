@@ -9,6 +9,7 @@ use App\Post;
 use App\Category;
 use App\Tag;
 use App\User;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -25,16 +26,16 @@ class PostController extends Controller
 
         $user = Auth::user();
         // $posts = Post::with('category')->paginate(10);
-        // $posts = Post::with('category');
+        $posts = Post::with('category')->get();
 
-        $data = [
-            'posts' => Post::with('category', 'tags')->get()
-            // 'categories' => Category::All()
-        ];
+        // $data = [
+        //     'posts' => Post::with('category', 'tags')->get()
+        //     // 'categories' => Category::All()
+        // ];
 
         // posso creare la solita array multidimensionale $data per portarmi dentro entrambe le variabili che ho salvato
 
-        return view('admin.post.index', $data, compact('user'));
+        return view('admin.post.index', compact('user', 'posts'));
     }
 
     /**
@@ -75,6 +76,12 @@ class PostController extends Controller
         );
 
         $new_post = new Post();
+
+        if (array_key_exists('image', $data)) {
+            $cover_url = Storage::put('post_covers', $data['image']);
+            $data['cover'] = $cover_url;
+        }
+
         $new_post->fill($data);
         //mi porto tutti i dati relativi allo user autorizzato in questa sessione
         $new_post->user_id = Auth::user()->id;

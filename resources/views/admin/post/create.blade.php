@@ -14,7 +14,7 @@
 
     {{-- {{ Auth::user()->id }} --}}
 
-    <form method="POST" action="{{ route('admin.post.store') }}" class="mx-5 my-3">
+    <form enctype="multipart/form-data" method="POST" action="{{ route('admin.post.store') }}" class="mx-5 my-3">
 
         @csrf
 
@@ -56,6 +56,12 @@
                     {{ $tag->name }}
                 </label>
             @endforeach
+
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Image</label>
+            <input name="image" type="file" class="form-control-file">
 
         </div>
 

@@ -9,7 +9,7 @@
 
     @foreach ($posts as $item)
         <div class="card w-25 m-1">
-            <img src="..." class="card-img-top" alt="...">
+            <img src="{{ asset("storage/$item->cover") }}" class="card-img-top" alt="...">
             <div class="card-body">
                 <h4 class="card-title">Post title: {{ $item->title }}</h4>
 
