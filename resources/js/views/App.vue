@@ -30,14 +30,47 @@
       poi tutta la struttura di vue partendo in App.vue si fa come al solito con
       componenti methods import e export
     </div>
+
+    <PostsList />
   </div>
 </template>
 
 <script>
+import PostsList from "../components/posts/PostsList.vue";
+
 export default {
   name: "App",
   components: {
-    // qui andranno i component di questa view
+    PostsList,
+  },
+  data() {
+    return {};
+  },
+  // mounted() {
+  //   this.getPosts();
+  // },
+  methods: {
+    // getPosts(page = 1) {
+    //   this.isLoading = true;
+    //   axios
+    //     .get("http://localhost:8000/api/posts?page=" + page)
+    //     .then((res) => {
+    //       console.log(res.data);
+    //       // this.posts = res.data.data;
+    //       const { data, current_page, last_page } = res.data;
+    //       this.posts = data;
+    //       this.pagination = {
+    //         lastPage: last_page,
+    //         currentPage: current_page,
+    //       };
+    //     })
+    //     .catch((err) => {
+    //       console.log(err);
+    //     })
+    //     .then(() => {
+    //       this.isLoading = false;
+    //     });
+    // },
   },
 };
 </script>

@@ -10,6 +10,7 @@ use App\Category;
 use App\Tag;
 use App\User;
 use Illuminate\Support\Facades\Storage;
+use App\Mail\SendNewMail;
 
 class PostController extends Controller
 {
@@ -91,6 +92,8 @@ class PostController extends Controller
         if (array_key_exists('tags', $data)) {
             $new_post->tags()->sync($data['tags']);
         }
+
+        // $mail = new SendNewMail();
 
         return redirect()->route('admin.post.show', ['post' => $new_post->id]);
     }
